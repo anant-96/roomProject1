@@ -11,13 +11,14 @@ import androidx.room.Update
 interface SubscriberDAO {
 
     @Insert
-    suspend fun insertSubscriber(subscriber: Subscriber)
+    suspend fun insertSubscriber(subscriber: Subscriber): Long // returns newly inserted row id as a “Long” value.
 
+    // Update, delete and deleteAll return an Int value indicating the number of rows that were updated or deleted successfully.
     @Update
-    suspend fun updateSubscriber(subscriber: Subscriber)
+    suspend fun updateSubscriber(subscriber: Subscriber) : Int
 
     @Delete
-    suspend fun deleteSubscriber(subscriber: Subscriber)
+    suspend fun deleteSubscriber(subscriber: Subscriber) : Int
 
     @Query("DELETE FROM subscriber_data_table")
     suspend fun deleteAll() : Int
