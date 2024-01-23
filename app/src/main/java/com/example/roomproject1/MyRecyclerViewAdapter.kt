@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roomproject1.databinding.ListItemBinding
 import com.example.roomproject1.db.Subscriber
 
-class MyRecyclerViewAdapter(private val subscribersList: List<Subscriber>,
-                            private val clickListener: (Subscriber) -> Unit)
+class MyRecyclerViewAdapter(private val clickListener: (Subscriber) -> Unit)
     : RecyclerView.Adapter<MyViewHolder>() {
+
+    private val subscribersList =  ArrayList<Subscriber>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding : ListItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false)
@@ -24,6 +25,10 @@ class MyRecyclerViewAdapter(private val subscribersList: List<Subscriber>,
         holder.bind(subscribersList[position], clickListener)
     }
 
+    fun setList(subscribers : List<Subscriber>){
+        subscribersList.clear()
+        subscribersList.addAll(subscribers)
+    }
 }
 
 class MyViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
